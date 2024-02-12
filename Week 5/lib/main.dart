@@ -1,36 +1,84 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors, library_private_types_in_public_api
-
 import 'package:flutter/material.dart';
-import 'package:url_launcher/link.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 void main() {
   runApp(MyApp());
+}
+
+enum Founder {
+  RamitaDeeprom,
+  ThitiwutHarn,
+  BuritSihabut,
+  PongsakornKongkaewrasamee
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: AboutsUsPage(),
+      home: AboutUsPage(),
     );
   }
 }
 
-class AboutsUsPage extends StatefulWidget {
+class AboutUsPage extends StatefulWidget {
   @override
-  _AboutsUsPageState createState() => _AboutsUsPageState();
+  _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _AboutsUsPageState extends State<AboutsUsPage> {
+class _ProfilePageState extends State<AboutUsPage> {
   int _currentIndex = 0;
+  Founder currentFounder = Founder.RamitaDeeprom;
+
+  void updateInfo() {
+    setState(() {
+      switch (currentFounder) {
+        case Founder.RamitaDeeprom:
+          currentFounder = Founder.ThitiwutHarn;
+          break;
+        case Founder.ThitiwutHarn:
+          currentFounder = Founder.BuritSihabut;
+          break;
+        case Founder.BuritSihabut:
+          currentFounder = Founder.PongsakornKongkaewrasamee;
+          break;
+        case Founder.PongsakornKongkaewrasamee:
+          currentFounder = Founder.RamitaDeeprom;
+          break;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    String name;
+    String linkedInUrl;
+
+    switch (currentFounder) {
+      case Founder.RamitaDeeprom:
+        name = 'Ramita Deeprom';
+        linkedInUrl = 'https://www.linkedin.com/in/ramita-deeprom/';
+        break;
+      case Founder.ThitiwutHarn:
+        name = 'Thitiwut Harnphatcharapanukorn';
+        linkedInUrl = 'https://www.linkedin.com/in/thitiwut-harn';
+        break;
+      case Founder.BuritSihabut:
+        name = 'Burit Sihabut';
+        linkedInUrl = 'https://www.linkedin.com/in/burit-sihabut-best/';
+        break;
+      case Founder.PongsakornKongkaewrasamee:
+        name = 'Pongsakorn Kongkaewrasamee';
+        linkedInUrl =
+            'https://th.linkedin.com/in/pongsakorn-kongkaewrasamee-32398a267';
+        break;
+    }
+
     return Scaffold(
       body: Column(
         children: [
           Container(
-            color: Color(0xFF27346A),
+            color: const Color(0xFF27346A),
             height: 70,
             child: Row(
               children: [
@@ -49,9 +97,9 @@ class _AboutsUsPageState extends State<AboutsUsPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(left: 16, top: 16, bottom: 8),
+            margin: const EdgeInsets.only(left: 16, top: 16, bottom: 8),
             alignment: Alignment.centerLeft,
-            child: Text(
+            child: const Text(
               'About Us',
               style: TextStyle(
                 color: Colors.black,
@@ -67,7 +115,7 @@ class _AboutsUsPageState extends State<AboutsUsPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'Founders',
                       style: TextStyle(
                         color: Colors.black,
@@ -80,63 +128,76 @@ class _AboutsUsPageState extends State<AboutsUsPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(
-                            Icons.arrow_left,
-                            size: 24,
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                currentFounder = Founder.RamitaDeeprom;
+                              });
+                            },
+                            child: const Icon(
+                              Icons.arrow_left,
+                              size: 24,
+                            ),
                           ),
-                          SizedBox(width: 16),
-                          CircleAvatar(
+                          const SizedBox(width: 16),
+                          const CircleAvatar(
                             radius: 40,
                             backgroundColor: Colors.white,
                             backgroundImage:
                                 AssetImage('assets/profile_picture.png'),
                           ),
-                          SizedBox(width: 16),
-                          Icon(
-                            Icons.arrow_right,
-                            size: 24,
+                          const SizedBox(width: 16),
+                          GestureDetector(
+                            onTap: updateInfo,
+                            child: const Icon(
+                              Icons.arrow_right,
+                              size: 24,
+                            ),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Text(
-                      'Ramita D.',
+                      name,
                       style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                          const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.link,
                             size: 24,
                           ),
-                          Link(
-                            uri: Uri.parse(
-                                'https://www.linkedin.com/in/ramita-deeprom/'),
-                            builder: (context, openLink) => MouseRegion(
-                              cursor: SystemMouseCursors.click,
-                              child: GestureDetector(
-                                onTap: openLink,
-                                child: Text(
-                                  'Ramita Deeprom',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
+                          InkWell(
+                            onTap: () async {
+                              if (await canLaunchUrlString(linkedInUrl)) {
+                                await launchUrlString(linkedInUrl);
+                              }
+                            },
+                            child: Text(
+                              currentFounder == Founder.RamitaDeeprom
+                                  ? 'Ramita Deeprom'
+                                  : currentFounder == Founder.ThitiwutHarn
+                                      ? 'Thitiwut Harn'
+                                      : currentFounder == Founder.BuritSihabut
+                                          ? 'Burit Sihabut'
+                                          : 'Pongsakorn Kongkaewrasamee',
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 30),
-                    Text(
+                    const SizedBox(height: 30),
+                    const Text(
                       'Description:',
                       style: TextStyle(
                         fontSize: 24,
@@ -144,7 +205,7 @@ class _AboutsUsPageState extends State<AboutsUsPage> {
                       ),
                       textAlign: TextAlign.left,
                     ),
-                    Text(
+                    const Text(
                       'MUICT Connect addresses the communication gap within the Faculty of ICT by providing a centralized platform for academic and extracurricular announcements. The aim is to keep ICT students informed about important events, academic updates, and opportunities to enhance their overall university experience.',
                       style: TextStyle(
                         fontSize: 12,
@@ -167,7 +228,7 @@ class _AboutsUsPageState extends State<AboutsUsPage> {
         },
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.black,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
@@ -190,23 +251,6 @@ class _AboutsUsPageState extends State<AboutsUsPage> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget buildProfileOption(String title, IconData icon, VoidCallback? onTap,
-      {Color? textColor, Color? iconColor}) {
-    return ListTile(
-      title: Text(
-        title,
-        style: TextStyle(
-          color: textColor,
-        ),
-      ),
-      leading: Icon(
-        icon,
-        color: iconColor,
-      ),
-      onTap: onTap,
     );
   }
 }
