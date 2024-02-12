@@ -11,17 +11,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ProfilePage(),
+      home: AboutUsPage(),
     );
   }
 }
 
-class ProfilePage extends StatefulWidget {
+class AboutUsPage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfilePageState extends State<AboutUsPage> {
   int _currentIndex = 0;
 
   @override
