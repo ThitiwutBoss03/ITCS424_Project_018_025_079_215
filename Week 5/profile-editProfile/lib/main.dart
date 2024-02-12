@@ -72,7 +72,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     SizedBox(height: 20),
                     Text(
-                      'Somchai',
+                      'Somchai Jaidee',
                       style:
                           TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
@@ -160,7 +160,13 @@ class _ProfilePageState extends State<ProfilePage> {
               if (title == 'Edit Profile') {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => EditProfilePage()),
+                  MaterialPageRoute(
+                    builder: (context) => EditProfilePage(
+                      name: 'Somchai Jaidee', // Pass name from the profile
+                      email: 'staff@gmail.com', // Pass email from the profile
+                      contactNumber: '0812345678', // Pass contact number from the profile
+                    ),
+                  ),
                 );
               } else {
                 onTap();
@@ -172,11 +178,24 @@ class _ProfilePageState extends State<ProfilePage> {
 }
 
 class EditProfilePage extends StatelessWidget {
+  final String name;
+  final String email;
+  final String contactNumber;
+
+  EditProfilePage({
+    required this.name,
+    required this.email,
+    required this.contactNumber,
+  })  : firstNameController = TextEditingController(text: name.split(' ')[0]),
+        lastNameController = TextEditingController(text: name.split(' ')[1]),
+        emailController = TextEditingController(text: email),
+        contactNumberController = TextEditingController(text: contactNumber);
+
   // Controller for text fields
-  final TextEditingController firstNameController = TextEditingController(text: 'Somchai');
-  final TextEditingController lastNameController = TextEditingController(text: 'Jaidee');
-  final TextEditingController emailController = TextEditingController(text: 'staff@gmail.com');
-  final TextEditingController contactNumberController = TextEditingController(text: '0812345678');
+  final TextEditingController firstNameController;
+  final TextEditingController lastNameController;
+  final TextEditingController emailController;
+  final TextEditingController contactNumberController;
 
   @override
   Widget build(BuildContext context) {
@@ -238,11 +257,11 @@ class EditProfilePage extends StatelessWidget {
                     SizedBox(height: 10),
                     // Name and Email
                     Text(
-                      'Somchai',
+                      name,
                       style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      'staff@gmail.com',
+                      email,
                       style: TextStyle(fontSize: 16, color: Colors.grey),
                     ),
                     SizedBox(height: 20),
