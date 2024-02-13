@@ -228,7 +228,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ProfilePage(),
+                  builder: (context) => ProfilePage(founder: currentFounder),
                 ),
               );
             } else {
@@ -266,6 +266,10 @@ class _AboutUsPageState extends State<AboutUsPage> {
 }
 
 class ProfilePage extends StatefulWidget {
+  final Founder founder;
+
+  ProfilePage({required this.founder});
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
