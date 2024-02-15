@@ -1,6 +1,4 @@
-// Kittipich Aiumbhornsin
-// #6488004
-// section 3
+// Ramita Deeprom 6488018
 import 'package:flutter/material.dart';
 
 void main() {
