@@ -62,6 +62,12 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "intl",
+      "rootUri": "file:///C:/Users/Thitiwut/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.19.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "lints",
       "rootUri": "file:///C:/Users/Thitiwut/AppData/Local/Pub/Cache/hosted/pub.dev/lints-2.1.1",
       "packageUri": "lib/",
@@ -88,6 +94,18 @@
     {
       "name": "path",
       "rootUri": "file:///C:/Users/Thitiwut/AppData/Local/Pub/Cache/hosted/pub.dev/path-1.8.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "plugin_platform_interface",
+      "rootUri": "file:///C:/Users/Thitiwut/AppData/Local/Pub/Cache/hosted/pub.dev/plugin_platform_interface-2.1.8",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "simple_gesture_detector",
+      "rootUri": "file:///C:/Users/Thitiwut/AppData/Local/Pub/Cache/hosted/pub.dev/simple_gesture_detector-0.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -122,6 +140,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "table_calendar",
+      "rootUri": "file:///C:/Users/Thitiwut/AppData/Local/Pub/Cache/hosted/pub.dev/table_calendar-3.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "term_glyph",
       "rootUri": "file:///C:/Users/Thitiwut/AppData/Local/Pub/Cache/hosted/pub.dev/term_glyph-1.2.1",
       "packageUri": "lib/",
@@ -132,6 +156,36 @@
       "rootUri": "file:///C:/Users/Thitiwut/AppData/Local/Pub/Cache/hosted/pub.dev/test_api-0.6.1",
       "packageUri": "lib/",
       "languageVersion": "3.0"
+    },
+    {
+      "name": "url_launcher",
+      "rootUri": "file:///C:/Users/Thitiwut/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher-6.0.0-nullsafety.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "url_launcher_linux",
+      "rootUri": "file:///C:/Users/Thitiwut/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_linux-0.1.0-nullsafety.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "url_launcher_macos",
+      "rootUri": "file:///C:/Users/Thitiwut/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_macos-0.1.0-nullsafety.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "url_launcher_platform_interface",
+      "rootUri": "file:///C:/Users/Thitiwut/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_platform_interface-2.3.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.1"
+    },
+    {
+      "name": "url_launcher_windows",
+      "rootUri": "file:///C:/Users/Thitiwut/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_windows-0.1.0-nullsafety.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "vector_math",
@@ -152,7 +206,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-02-05T03:12:23.053406Z",
+  "generated": "2024-02-15T14:52:37.638585Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }
