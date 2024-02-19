@@ -30,7 +30,7 @@ class _AnnouncementState extends State<Announcement> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Image.asset(
-                    'assets/images/MUICT_Logo.png', // Replace with your actual logo path
+                    'assets/Logo.png', // Replace with your actual logo path
                     fit: BoxFit.contain,
                     height: 60, // Adjust the height of the logo as needed
                   ),
