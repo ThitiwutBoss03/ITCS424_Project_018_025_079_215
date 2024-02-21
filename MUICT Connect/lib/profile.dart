@@ -5,6 +5,7 @@ import 'announcement.dart';
 import 'main.dart';
 import 'bookmark.dart';
 import 'notification.dart';
+import 'aboutus.dart';
 
 void main() {
   runApp(MyApp());
@@ -212,6 +213,13 @@ class _ProfilePageState extends State<ProfilePage> {
                       email: 'staff@gmail.com', // Pass email from the profile
                       contactNumber: '0812345678', // Pass contact number from the profile
                     ),
+                  ),
+                );
+              } else if (title == 'About') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AboutUsPage(),
                   ),
                 );
               } else {

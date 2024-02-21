@@ -1,5 +1,5 @@
 {
-   "checksum": "884ad8de30fb6bc9ca6712bf5096fd66",
+   "checksum": "e00d7440e571ee6eb0da4b2357a01bfe",
    "roots": {
       "bookmark_bar": {
          "children": [ {
@@ -9,6 +9,8 @@
                "guid": "585701b2-3fef-439d-970d-20bbc14f3a84",
                "id": "18",
                "name": "Lenovo Support",
+               "show_icon": false,
+               "source": "unknown",
                "type": "url",
                "url": "http://support.lenovo.com/"
             }, {
@@ -17,6 +19,8 @@
                "guid": "52bd0dff-c79f-4449-b87d-c6339e04c252",
                "id": "19",
                "name": "Lenovo",
+               "show_icon": false,
+               "source": "unknown",
                "type": "url",
                "url": "http://www.lenovo.com/"
             } ],
@@ -26,6 +30,7 @@
             "guid": "8899caa8-7a64-4a5a-b37f-44526c3ff347",
             "id": "17",
             "name": "Lenovo",
+            "source": "unknown",
             "type": "folder"
          } ],
          "date_added": "13351274102804546",
@@ -33,7 +38,8 @@
          "date_modified": "0",
          "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
          "id": "1",
-         "name": "Bookmarks bar",
+         "name": "Favorites bar",
+         "source": "unknown",
          "type": "folder"
       },
       "other": {
@@ -43,7 +49,8 @@
          "date_modified": "0",
          "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
          "id": "2",
-         "name": "Other bookmarks",
+         "name": "Other favorites",
+         "source": "unknown",
          "type": "folder"
       },
       "synced": {
@@ -53,7 +60,8 @@
          "date_modified": "0",
          "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
          "id": "3",
-         "name": "Mobile bookmarks",
+         "name": "Mobile favorites",
+         "source": "unknown",
          "type": "folder"
       }
    },
