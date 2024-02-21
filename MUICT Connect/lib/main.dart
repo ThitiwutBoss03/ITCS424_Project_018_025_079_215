@@ -1,9 +1,12 @@
 // import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' hide VoidCallback;
 import 'package:table_calendar/table_calendar.dart';
-import 'dart:html';
+//import 'dart:html';
 
 import 'announcement.dart';
+import 'profile.dart';
+import 'bookmark.dart';
+import 'notification.dart';
 
 void main() {
   runApp(MyApp());
@@ -81,7 +84,7 @@ class _DashboardState extends State<DashboardApp> {
                   ),
                 ),
                 BoxWidgetWithImageOnLeft(
-                  imageUrl: 'assets/images/dash.jpg',
+                  imageUrl: 'assets/dash.jpg',
                   title: 'ICT Announcement 1',
                   description: 'ho ho ho ho ho ho ho',
                   date: 'Feb 2, 2022',
@@ -108,11 +111,35 @@ class _DashboardState extends State<DashboardApp> {
                 ),
               );
             }
+            else if (index == 1) { // Assuming 'Announcement' is at index 2
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BookmarkPage(),
+                ),
+              );
+            }
             else if (index == 2) { // Assuming 'Announcement' is at index 2
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => Announcement(),
+                ),
+              );
+            }
+            else if (index == 3) { // Assuming 'Announcement' is at index 2
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => NotificationPage(),
+                ),
+              );
+            }
+            else if (index == 4) { // Assuming 'Announcement' is at index 2
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfilePage(),
                 ),
               );
             }

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart' hide VoidCallback;
 import 'dart:html';
 
 import 'main.dart';
+import 'profile.dart';
+import 'bookmark.dart';
+import 'notification.dart';
 
 // Announcement
 class Announcement extends StatefulWidget {
@@ -99,14 +102,14 @@ class _AnnouncementState extends State<Announcement> {
               children: [
                 // Display multiple boxes
                 BoxWidget(
-                  imageUrl: '/assets/images/smtg1.jpg',
+                  imageUrl: '/assets/smtg1.jpg',
                   title: 'ICT Announcement 1',
                   description: 'ho ho ho ho ho ho ho',
                   date: 'Feb 2, 2022',
                   category: 'Registration',
                 ),
                 BoxWidget(
-                  imageUrl: '/assets/images/smtg2.jpg',
+                  imageUrl: '/assets/smtg2.jpg',
                   title: 'ICT Announcement 2',
                   description: 'ho ho ho ho ho ho ho',
                   date: 'Feb 2, 2022',
@@ -133,11 +136,35 @@ class _AnnouncementState extends State<Announcement> {
                 ),
               );
             }
+            else if (index == 1) { // Assuming 'Announcement' is at index 2
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BookmarkPage(),
+                ),
+              );
+            }
             else if (index == 2) { // Assuming 'Announcement' is at index 2
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => Announcement(),
+                ),
+              );
+            }
+            else if (index == 3) { // Assuming 'Announcement' is at index 2
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => NotificationPage(),
+                ),
+              );
+            }
+            else if (index == 4) { // Assuming 'Announcement' is at index 2
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfilePage(),
                 ),
               );
             }
