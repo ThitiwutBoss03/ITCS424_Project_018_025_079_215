@@ -1,6 +1,6 @@
 # Generated code do not commit.
-file(TO_CMAKE_PATH "C:\\flutter" FLUTTER_ROOT)
-file(TO_CMAKE_PATH "C:\\Users\\Thitiwut\\Desktop\\Learn Code\\Flutter\\Test\\flutter_application_1" PROJECT_DIR)
+file(TO_CMAKE_PATH "C:\\src\\flutter" FLUTTER_ROOT)
+file(TO_CMAKE_PATH "E:\\Editor\\Project\\Mobile Wireless\\ITCS424_Project_018_025_079_215\\MUICT Connect" PROJECT_DIR)
 
 set(FLUTTER_VERSION "1.0.0+1" PARENT_SCOPE)
 set(FLUTTER_VERSION_MAJOR 1 PARENT_SCOPE)
@@ -10,15 +10,15 @@ set(FLUTTER_VERSION_BUILD 1 PARENT_SCOPE)
 
 # Environment variables to pass to tool_backend.sh
 list(APPEND FLUTTER_TOOL_ENVIRONMENT
-  "FLUTTER_ROOT=C:\\flutter"
-  "PROJECT_DIR=C:\\Users\\Thitiwut\\Desktop\\Learn Code\\Flutter\\Test\\flutter_application_1"
-  "FLUTTER_ROOT=C:\\flutter"
-  "FLUTTER_EPHEMERAL_DIR=C:\\Users\\Thitiwut\\Desktop\\Learn Code\\Flutter\\Test\\flutter_application_1\\windows\\flutter\\ephemeral"
-  "PROJECT_DIR=C:\\Users\\Thitiwut\\Desktop\\Learn Code\\Flutter\\Test\\flutter_application_1"
-  "FLUTTER_TARGET=C:\\Users\\Thitiwut\\Desktop\\Learn Code\\Flutter\\Test\\flutter_application_1\\lib\\main.dart"
-  "DART_DEFINES=RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ==,RkxVVFRFUl9XRUJfQ0FOVkFTS0lUX1VSTD1odHRwczovL3d3dy5nc3RhdGljLmNvbS9mbHV0dGVyLWNhbnZhc2tpdC8zZjNlNTYwMjM2NTM5YjdlMjcwMmY1YWM3OTBiMmE0NjkxYjMyZDQ5Lw=="
+  "FLUTTER_ROOT=C:\\src\\flutter"
+  "PROJECT_DIR=E:\\Editor\\Project\\Mobile Wireless\\ITCS424_Project_018_025_079_215\\MUICT Connect"
+  "FLUTTER_ROOT=C:\\src\\flutter"
+  "FLUTTER_EPHEMERAL_DIR=E:\\Editor\\Project\\Mobile Wireless\\ITCS424_Project_018_025_079_215\\MUICT Connect\\windows\\flutter\\ephemeral"
+  "PROJECT_DIR=E:\\Editor\\Project\\Mobile Wireless\\ITCS424_Project_018_025_079_215\\MUICT Connect"
+  "FLUTTER_TARGET=E:\\Editor\\Project\\Mobile Wireless\\ITCS424_Project_018_025_079_215\\MUICT Connect\\lib\\main.dart"
+  "DART_DEFINES=RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ==,RkxVVFRFUl9XRUJfQ0FOVkFTS0lUX1VSTD1odHRwczovL3d3dy5nc3RhdGljLmNvbS9mbHV0dGVyLWNhbnZhc2tpdC9mNDBlOTc2YmVkZmY1N2U2OWUxYjNkODlhN2MyYTNjNjE3YTAzZGFkLw=="
   "DART_OBFUSCATION=false"
   "TRACK_WIDGET_CREATION=true"
   "TREE_SHAKE_ICONS=false"
-  "PACKAGE_CONFIG=C:\\Users\\Thitiwut\\Desktop\\Learn Code\\Flutter\\Test\\flutter_application_1\\.dart_tool\\package_config.json"
+  "PACKAGE_CONFIG=E:\\Editor\\Project\\Mobile Wireless\\ITCS424_Project_018_025_079_215\\MUICT Connect\\.dart_tool\\package_config.json"
 )
