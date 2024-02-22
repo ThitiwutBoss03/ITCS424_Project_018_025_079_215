@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'edit_profile.dart';
+import 'announcement.dart';
+import 'main.dart';
+import 'bookmark.dart';
+import 'notification.dart';
+import 'aboutus.dart';
 
 void main() {
   runApp(MyApp());
@@ -115,6 +120,46 @@ class _ProfilePageState extends State<ProfilePage> {
           setState(() {
             _currentIndex = index;
           });
+          if (index == 0) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DashboardApp(),
+                ),
+              );
+            }
+            else if (index == 1) { // Assuming 'Announcement' is at index 2
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BookmarkPage(),
+                ),
+              );
+            }
+            else if (index == 2) { // Assuming 'Announcement' is at index 2
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Announcement(),
+                ),
+              );
+            }
+            else if (index == 3) { // Assuming 'Announcement' is at index 2
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => NotificationPage(),
+                ),
+              );
+            }
+            else if (index == 4) { // Assuming 'Announcement' is at index 2
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfilePage(),
+                ),
+              );
+            }
         },
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.black,
@@ -170,7 +215,22 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                 );
-              } else {
+              } else if (title == 'About') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AboutUsPage(),
+                  ),
+                );
+              } 
+              else if (title == 'Notifications') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NotificationPage(),
+                  ),
+                );
+              }else {
                 onTap();
               }
             }

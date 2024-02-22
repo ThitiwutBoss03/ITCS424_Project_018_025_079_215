@@ -10,7 +10,7 @@
                "id": "18",
                "name": "Lenovo Support",
                "show_icon": false,
-               "source": "import_fre",
+               "source": "unknown",
                "type": "url",
                "url": "http://support.lenovo.com/"
             }, {
@@ -20,7 +20,7 @@
                "id": "19",
                "name": "Lenovo",
                "show_icon": false,
-               "source": "import_fre",
+               "source": "unknown",
                "type": "url",
                "url": "http://www.lenovo.com/"
             } ],
@@ -30,7 +30,7 @@
             "guid": "8899caa8-7a64-4a5a-b37f-44526c3ff347",
             "id": "17",
             "name": "Lenovo",
-            "source": "import_fre",
+            "source": "unknown",
             "type": "folder"
          } ],
          "date_added": "13351274102804546",
@@ -65,6 +65,5 @@
          "type": "folder"
       }
    },
-   "sync_metadata": "CkEKHgiIgQISCLBcPq2NAQAAKg4QABgBIAAoBTAAOABAABIAIAEqGGF3eFFwdDhJcVRPZ1hjbDZ6d0pwZ0E9PaAGDBKJAQgDEoQBChxuamdEdTg4ZUNydlhwODZwRDdmSEdjcUZwODg9EiQ1ODdkZWMyYi1hNjIyLTUwM2QtOWUyYS01OTJlMWVkMjQwZjcYACAAKAAwrYS4u7AwOMfxldHpL0DH8ZXR6S9KHHl6TkIwMWNuNTRBN2NSVTB1VCsvUGdtVHRVbz1aAGUAAAAAEokBCAIShAEKHFljU1RvbnZFU1B3cUNzNEwyY3JWaHY2OEw5OD0SJDQ0MDc2NzA5LWUyZmUtNTM4OC04YWE2LTg3NDA3ZmUwYzU2YhgAIAAoADCthLi7sDA4iPGV0ekvQIjxldHpL0ocb1BWa2h3QlJiVjY1S0NXUjIrSU9OSFdvT3U4PVoAZQAAAAASiQEIARKEAQoceXhKLzZmdmtlY3I3a3A1RVF6QjR0V0xwZGJFPRIkY2Q5ODg2ODgtOGIwMS01Zjg3LTlhYzYtMzdmNjI3NTBmNzg5GAAgACgAMK2EuLuwMDj48JXR6S9A+PCV0ekvShxhUkNXTGdoRjliNUlucUtJRHZ1Si9qdlFrRmM9WgBlAAAAABKnAQgREqIBChxxeDhBUWJFWSt6Z3Z4eHByN1Q1QkVRWEkzN1U9EiQ4ODk5Y2FhOC03YTY0LTRhNWEtYjM3Zi00NDUyNmMzZmYzNDcYACAAKAAw3duFxPEwOMrchcTxMEDK3IXE8TBKHHlJc1g5RkhqNjVjUUJCWlJZR2dZOHJKL1p4bz1aHiIcK0wzWTBiUG1XTFdXQXJja0xILzk3RitHa0tBPWUAAAAAEqcBCBISogEKHHlYY3RLdlBHT091OW1OeXdhd09jWENaSm1aMD0SJDU4NTcwMWIyLTNmZWYtNDM5ZC05NzBkLTIwYmJjMTRmM2E4NBgAIAAoADDe24XE8TA4p92FxPEwQKfdhcTxMEoccmZ3OGpHZWs4M3FxcTRBaFV3ei9MSDNHQnpVPVoeIhxGcjdmeU13U2NYMGhzQWhhLzBXelZDNW9ZL009ZQAAAAASpwEIExKiAQocbThLRTEzUUw3WmNZeUVHbVJ0eElLZmFJeTNnPRIkNTJiZDBkZmYtYzc5Zi00NDQ5LWI4N2QtYzYzMzllMDRjMjUyGAAgACgAMN/bhcTxMDjH3YXE8TBAx92FxPEwShxJc1cyWktZYXdPV2ltMnVKSTNTMXdhdTBBN1k9Wh4iHHpJRk1lMVRrV2hLNk1hcVRhVEx2SDlDTFhXaz1lAAAAADAAOAA=",
    "version": 1
 }

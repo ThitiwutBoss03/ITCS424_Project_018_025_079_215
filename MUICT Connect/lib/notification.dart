@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'bookmark.dart';
+import 'announcement.dart';
+import 'profile.dart';
+import 'main.dart';
 
 class Notification extends StatefulWidget {
   @override
@@ -41,12 +44,6 @@ class NotificationPage extends StatelessWidget {
               appBar: AppBar(
                 title: Row(
                   children: [
-                    IconButton(
-                      icon: Icon(Icons.arrow_back),
-                      onPressed: () {
-                        // Handle back action
-                      },
-                    ),
                     SizedBox(width: 8.0),
                     Text('Notifications'),
                     Spacer(),
@@ -121,6 +118,9 @@ class BottomFunctionBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      currentIndex: 3,
+      selectedItemColor: Colors.black,
+      unselectedItemColor: Colors.black,
       items: [
         BottomNavigationBarItem(
           icon: Icon(Icons.home, color: Colors.black),
@@ -145,15 +145,46 @@ class BottomFunctionBar extends StatelessWidget {
       ],
       onTap: (index) {
         // Handle tapping on the navigation bar items
-        switch (index) {
-          case 1: // Index of the bookmark icon
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => BookmarkPage()),
-            );
-            break;
-          // Add cases for other icons if needed
-        }
+        if (index == 0) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DashboardApp(),
+                ),
+              );
+            }
+            else if (index == 1) { // Assuming 'Announcement' is at index 2
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BookmarkPage(),
+                ),
+              );
+            }
+            else if (index == 2) { // Assuming 'Announcement' is at index 2
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Announcement(),
+                ),
+              );
+            }
+            else if (index == 3) { // Assuming 'Announcement' is at index 2
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => NotificationPage(),
+                ),
+              );
+            }
+            else if (index == 4) { // Assuming 'Announcement' is at index 2
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfilePage(),
+                ),
+              );
+            }
       },
     );
   }
