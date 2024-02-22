@@ -222,7 +222,15 @@ class _ProfilePageState extends State<ProfilePage> {
                     builder: (context) => AboutUsPage(),
                   ),
                 );
-              } else {
+              } 
+              else if (title == 'Notifications') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NotificationPage(),
+                  ),
+                );
+              }else {
                 onTap();
               }
             }
