@@ -1,0 +1,1 @@
+ E:\\Editor\\Project\\Mobile\ Wireless\\ITCS424_Project_018_025_079_215\\Week\ 5\\.dart_tool\\flutter_build\\f6ff95b1dc3e4564f99ea6f1e7e62583\\native_assets.yaml: 
