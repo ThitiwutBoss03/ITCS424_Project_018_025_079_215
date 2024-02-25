@@ -172,7 +172,6 @@ class _DashboardState extends State<DashboardApp> {
       print("Request failed with status code ${response.statusCode}");
     }
   }
-  
 
   void _onDaySelected(DateTime day, DateTime focusedDay) {
     setState(() {
