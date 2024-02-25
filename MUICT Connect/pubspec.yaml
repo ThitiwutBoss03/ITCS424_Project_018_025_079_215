@@ -43,6 +43,8 @@ dependencies:
   table_calendar: ^3.1.0
   url_launcher: ^6.0.0-nullsafety.6
   oauth2_client: ^3.0.0
+  firebase_core: ^2.24.2
+  cloud_firestore: ^4.14.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -75,14 +77,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/Logo.png
-    - assets/profile_picture.png
-    - assets/Bookmark.png
-    - assets/dash.jpg
-    - assets/Logo.png
-    - assets/menu.png
-    - assets/smtg1.jpg
-    - assets/smtg2.jpg
+    - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

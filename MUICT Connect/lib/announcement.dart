@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart' hide VoidCallback;
-import 'dart:html';
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore
 
 import 'main.dart';
 import 'profile.dart';
@@ -15,13 +15,18 @@ class Announcement extends StatefulWidget {
 class _AnnouncementState extends State<Announcement> {
   int _currentIndex = 0;
   String selectedCategory = ''; // for category
-  List<String> categories = ['Registration', 'Announcement', 'Internship', 'Activities', 'Bookmark']; // for category
+  List<String> categories = [
+    'Registration',
+    'Announcement',
+    'Internship',
+    'Activities',
+    'Bookmark'
+  ]; // for category
 
   TextEditingController _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Column(
         children: [
@@ -44,21 +49,23 @@ class _AnnouncementState extends State<Announcement> {
           // search
           Container(
             // color: Color(0xececec),
-            child: 
-              buildProfileOption('Search', Icons.search, () {
-                // color: Color(0xececec),
-                showSearch(context: context, delegate: DataSearch());
-              }),
+            child: buildProfileOption('Search', Icons.search, () {
+              // color: Color(0xececec),
+              showSearch(context: context, delegate: DataSearch());
+            }),
           ),
           // category
           Container(
             //chosen of category
             alignment: Alignment.centerLeft, // Align the content to the left
-            child:
-              const Text('  VIEW BY CATEGORY',
-                textAlign: TextAlign.left,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color.fromARGB(255, 103, 83, 83)),
-              ),
+            child: const Text(
+              '  VIEW BY CATEGORY',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Color.fromARGB(255, 103, 83, 83)),
+            ),
           ),
           Container(
             // category lists
@@ -82,11 +89,12 @@ class _AnnouncementState extends State<Announcement> {
                               ? const Color.fromARGB(255, 121, 121, 121)
                               : const Color.fromARGB(255, 228, 228, 228),
                         ),
-                        child: Text(categories[index],
+                        child: Text(
+                          categories[index],
                           style: TextStyle(
                             color: selectedCategory == categories[index]
-                              ? Color.fromARGB(255,255,255,255)
-                              : Color.fromARGB(255, 0, 0, 0),
+                                ? Color.fromARGB(255, 255, 255, 255)
+                                : Color.fromARGB(255, 0, 0, 0),
                           ),
                         ),
                       ),
@@ -98,25 +106,41 @@ class _AnnouncementState extends State<Announcement> {
           ),
           // content box
           Expanded(
-            child: ListView(
-              children: [
-                // Display multiple boxes
-                BoxWidget(
-                  imageUrl: '/assets/smtg1.jpg',
-                  title: 'ICT Announcement 1',
-                  description: 'ho ho ho ho ho ho ho',
-                  date: 'Feb 2, 2022',
-                  category: 'Registration',
-                ),
-                BoxWidget(
-                  imageUrl: '/assets/smtg2.jpg',
-                  title: 'ICT Announcement 2',
-                  description: 'ho ho ho ho ho ho ho',
-                  date: 'Feb 2, 2022',
-                  category: 'Registration',
-                ),
-                // Add more BoxWidget instances as needed
-              ],
+            child: StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection('Announcement')
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                }
+                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                  return Center(child: Text('No data available'));
+                }
+                final documents = snapshot.data!.docs;
+                return ListView.builder(
+                  itemCount: documents.length,
+                  itemBuilder: (context, index) {
+                    final document = documents[index];
+                    final imageUrl = document['imageURL'] ?? '';
+                    final title = document['title'] ?? '';
+                    final description = document['description'] ?? '';
+                    final date = document['createdDate']?.toString() ?? '';
+                    final category = document['category'] ?? '';
+
+                    return BoxWidget(
+                      imageUrl: imageUrl,
+                      title: title,
+                      description: description,
+                      date: date,
+                      category: category,
+                    );
+                  },
+                );
+              },
             ),
           ),
         ],
@@ -125,50 +149,46 @@ class _AnnouncementState extends State<Announcement> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 2,
         onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-            if (index == 0) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => DashboardApp(),
-                ),
-              );
-            }
-            else if (index == 1) { // Assuming 'Announcement' is at index 2
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => BookmarkPage(),
-                ),
-              );
-            }
-            else if (index == 2) { // Assuming 'Announcement' is at index 2
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Announcement(),
-                ),
-              );
-            }
-            else if (index == 3) { // Assuming 'Announcement' is at index 2
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => NotificationPage(),
-                ),
-              );
-            }
-            else if (index == 4) { // Assuming 'Announcement' is at index 2
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ProfilePage(),
-                ),
-              );
-            }
-          },
+          setState(() {
+            _currentIndex = index;
+          });
+          if (index == 0) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DashboardApp(),
+              ),
+            );
+          } else if (index == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => BookmarkPage(),
+              ),
+            );
+          } else if (index == 2) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Announcement(),
+              ),
+            );
+          } else if (index == 3) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => NotificationPage(),
+              ),
+            );
+          } else if (index == 4) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProfilePage(),
+              ),
+            );
+          }
+        },
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.black,
         items: [
@@ -307,18 +327,17 @@ class BoxWidget extends StatelessWidget {
             width: double.infinity,
             fit: BoxFit.cover,
           ),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: Text('Date: $date • Category: $category'),
-          // ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                  Text(
-                  title,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 IconButton(
                   icon: Icon(Icons.favorite_border),
@@ -326,7 +345,7 @@ class BoxWidget extends StatelessWidget {
                     // Handle favorite button tap
                   },
                 ),
-              ]
+              ],
             ),
           ),
           Padding(
@@ -337,18 +356,8 @@ class BoxWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Text('Date: $date • Category: $category'),
           ),
-          // IconButton(
-          //   alignment: Alignment.center,
-          //   icon: Icon(Icons.favorite_border),
-          //   onPressed: () {
-          //     // Handle favorite button tap
-          //   },
-          // ),
         ],
       ),
     );
   }
 }
-// end content box
-
-// end of Announcement

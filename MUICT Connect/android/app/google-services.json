@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "33592492352",
+    "project_id": "muict-connect-75869",
+    "storage_bucket": "muict-connect-75869.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33592492352:android:5c865453eb117b9ef47aa5",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYfgF_nsxgiQqoAV7eL78kBe4i_eqzxlc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
