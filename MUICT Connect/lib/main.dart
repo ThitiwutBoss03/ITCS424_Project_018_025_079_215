@@ -136,7 +136,6 @@ class WeatherBox extends StatelessWidget {
 
 class _DashboardState extends State<DashboardApp> {
   int _currentIndex = 0;
-  DateTime today = DateTime.now();
 
   // Weather data variable
   dynamic weatherData;
@@ -173,16 +172,9 @@ class _DashboardState extends State<DashboardApp> {
     }
   }
 
-  void _onDaySelected(DateTime day, DateTime focusedDay) {
-    setState(() {
-      today = day;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    getData();
-
     return Scaffold(
       body: Column(
         children: [
@@ -220,13 +212,11 @@ class _DashboardState extends State<DashboardApp> {
                       ),
                       // calendar
                       TableCalendar(
-                        selectedDayPredicate: (day) => isSameDay(day, today),
                         headerStyle: HeaderStyle(
                             formatButtonVisible: false, titleCentered: true),
                         firstDay: DateTime.utc(2020, 1, 1),
                         lastDay: DateTime.utc(2030, 3, 14),
                         focusedDay: DateTime.now(),
-                        onDaySelected: _onDaySelected,
                       ), //https://pub.dev/packages/table_calendar
                       //end calendar
                     ],
