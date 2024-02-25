@@ -147,9 +147,7 @@ class _DashboardState extends State<DashboardApp> {
     getData(); // Move the data fetching to initState
   }
 
-
   getData() async {
-    final apiKey = 'a1e8ca175935779fb295df7f6eff8088';
     final url = Uri.parse(
         "https://api.openweathermap.org/data/2.5/weather?lat=13.792914&lon=100.324200&appid=86fb463f2dc2a3f8797be6018610d38a");
     http.Response response = await http.get(url);
