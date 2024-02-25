@@ -45,13 +45,19 @@ class WeatherBox extends StatelessWidget {
     return kelvin - 273.15;
   }
 
-   @override
+  // Function to map weather condition code to icon URL
+  String getWeatherIcon(String conditionCode) {
+    return "https://openweathermap.org/img/wn/$conditionCode@2x.png";
+  }
+
+  @override
   Widget build(BuildContext context) {
     if (weatherData != null) {
       // Extract and display relevant weather information
       final temperatureKelvin = weatherData['main']['temp'];
       final temperatureCelsius = kelvinToCelsius(temperatureKelvin);
       final description = weatherData['weather'][0]['description'];
+      final conditionCode = weatherData['weather'][0]['icon'];
 
       return Container(
         margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
@@ -79,12 +85,30 @@ class WeatherBox extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            Text(
-              'Description: $description',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.white,
-              ),
+            Row(
+              children: [
+                Text(
+                  'Description: ',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                ),
+                Image.network(
+                  getWeatherIcon(conditionCode),
+                  height: 24,
+                  width: 24,
+                  color: Colors.white,
+                ),
+                SizedBox(width: 5),
+                Text(
+                  description,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
