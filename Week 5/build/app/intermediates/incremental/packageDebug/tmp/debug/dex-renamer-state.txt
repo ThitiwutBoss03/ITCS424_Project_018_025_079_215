@@ -1,4 +1,0 @@
-#Tue Feb 13 00:10:18 ICT 2024
-base.0=E\:\\Editor\\Project\\Mobile Wireless\\ITCS424_Project_018_025_079_215\\Week 5\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
