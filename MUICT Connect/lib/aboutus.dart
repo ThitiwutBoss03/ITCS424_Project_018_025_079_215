@@ -3,9 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'edit_profile.dart';
 import 'announcement.dart';
-import 'main.dart';
+import 'dashboard.dart';
 import 'bookmark.dart';
 import 'notification.dart';
 import 'profile.dart';

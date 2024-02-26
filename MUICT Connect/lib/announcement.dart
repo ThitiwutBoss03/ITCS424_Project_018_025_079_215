@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore
 
-import 'main.dart';
+import 'dashboard.dart';
 import 'profile.dart';
 import 'bookmark.dart';
 import 'notification.dart';
@@ -22,8 +22,6 @@ class _AnnouncementState extends State<Announcement> {
     'Activities',
     'Bookmark'
   ]; // for category
-
-  TextEditingController _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

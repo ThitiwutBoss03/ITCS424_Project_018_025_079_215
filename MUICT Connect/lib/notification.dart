@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'bookmark.dart';
 import 'announcement.dart';
 import 'profile.dart';
-import 'main.dart';
+import 'dashboard.dart';
 
 class Notification extends StatefulWidget {
   @override

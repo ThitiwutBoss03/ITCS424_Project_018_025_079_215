@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'edit_profile.dart';
 import 'announcement.dart';
-import 'main.dart';
+import 'dashboard.dart';
 import 'bookmark.dart';
 import 'notification.dart';
 import 'aboutus.dart';
