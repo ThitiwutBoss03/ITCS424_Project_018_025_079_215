@@ -12,8 +12,8 @@ A few resources to get you started if this is your first Flutter project:
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
 APi Key (OpenWeather)
-86fb463f2dc2a3f8797be6018610d38a
-3d5ea248b7dc3061d739255f5a6cb50e
+- 86fb463f2dc2a3f8797be6018610d38a
+- 3d5ea248b7dc3061d739255f5a6cb50e
 
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
