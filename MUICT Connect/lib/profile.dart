@@ -169,7 +169,7 @@ class _ProfilePageState extends State<ProfilePage> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
+            icon: Icon(Icons.bookmark),
             label: 'Bookmark',
           ),
           BottomNavigationBarItem(

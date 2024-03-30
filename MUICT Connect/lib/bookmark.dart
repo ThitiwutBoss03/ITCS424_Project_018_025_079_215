@@ -82,7 +82,7 @@ class BookmarkPage extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.bookmark, color: Colors.black),
-          label: 'Calendar',
+          label: 'bookmark',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.announcement, color: Colors.black),

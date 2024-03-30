@@ -16,13 +16,13 @@ class _AnnouncementState extends State<Announcement> {
   int _currentIndex = 0;
   String selectedCategory = ''; // for category
   List<String> categories = [
-    'Registration',
-    'Announcement',
-    'Internship',
-    'Activities',
-    'Bookmark'
+    'registration',
+    'announcement',
+    'internship',
+    'activities',
+    'bookmark'
   ]; // for category
-
+  List<DocumentSnapshot> allDocuments = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,7 +79,12 @@ class _AnnouncementState extends State<Announcement> {
                       ElevatedButton(
                         onPressed: () {
                           setState(() {
-                            selectedCategory = categories[index];
+                            if (selectedCategory == categories[index]) {
+                              // If the same category is clicked again, undo the filter
+                              selectedCategory = '';
+                            } else {
+                              selectedCategory = categories[index];
+                            }
                           });
                         },
                         style: ElevatedButton.styleFrom(
@@ -118,11 +123,16 @@ class _AnnouncementState extends State<Announcement> {
                 if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                   return Center(child: Text('No data available'));
                 }
-                final documents = snapshot.data!.docs;
+                allDocuments = snapshot.data!.docs;
+                final filteredDocuments = selectedCategory.isEmpty
+                    ? allDocuments
+                    : allDocuments
+                        .where((doc) => doc['category'] == selectedCategory)
+                        .toList();
                 return ListView.builder(
-                  itemCount: documents.length,
+                  itemCount: filteredDocuments.length,
                   itemBuilder: (context, index) {
-                    final document = documents[index];
+                    final document = filteredDocuments[index];
                     final imageUrl = document['imageURL'] ?? '';
                     final title = document['title'] ?? '';
                     final description = document['description'] ?? '';

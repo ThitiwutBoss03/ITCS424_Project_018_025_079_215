@@ -70,7 +70,7 @@
    }, {
       "appName": "reading_view",
       "data": {
-         "blockList": [ "gisdvl-jrvoice2.jreast.co.jp", "jrvoice2.jreast.co.jp" ],
+         "blockList": [ "gisdvl-jrvoice2.jreast.co.jp", "jrvoice2.jreast.co.jp", "www.marriott.com" ],
          "textLengthThreshold": 40,
          "whiteList": [ "mip.shengxuxu.com" ]
       },
@@ -245,9 +245,9 @@
       "data": {
          "operation_notification_config": {
             "body": "Sample Body",
-            "max_datetime_str": "28 Feb 2024 13:00 GMT",
+            "max_datetime_str": "31 Mar 2024 13:00 GMT",
             "max_version": 125,
-            "min_datetime_str": "6 Feb 2024 13:00 GMT",
+            "min_datetime_str": "1 Mar 2024 13:00 GMT",
             "min_version": 122,
             "navigate_to": "microsoft-edge-x://action/copilot?query=weather+in+seattle&input=Keyboard&launchsource=DeeplinkAppStore&mode=Precise",
             "operation_id": 1,
@@ -261,9 +261,9 @@
          },
          "operation_upsell_config": {
             "is_full_screen": false,
-            "max_datetime_str": "28 Feb 2024 13:00 GMT",
+            "max_datetime_str": "31 Mar 2024 13:00 GMT",
             "max_version": 125,
-            "min_datetime_str": "6 Feb 2024 13:00 GMT",
+            "min_datetime_str": "1 Mar 2024 13:00 GMT",
             "min_version": 122,
             "operation_id": 1,
             "target_user_profile": {
@@ -271,13 +271,13 @@
                "language_code": "en",
                "operation_debug_user": true
             },
-            "upsell_url": "https://edgeop.azurewebsites.net/sample"
+            "upsell_url": "https://edgemobile-operationplatform.azurewebsites.net/sample"
          }
       },
       "effectStrategy": "launch",
       "instanceId": "35cafee49b9741a5ae5b2f7799ecc815",
       "type": "normal",
-      "version": "1010"
+      "version": "1011"
    } ],
-   "version": "202402220003"
+   "version": "202403200001"
 }
