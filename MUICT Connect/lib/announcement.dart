@@ -5,6 +5,7 @@ import 'dashboard.dart';
 import 'profile.dart';
 import 'bookmark.dart';
 import 'notification.dart';
+import 'create_post.dart';
 
 // Announcement
 class Announcement extends StatefulWidget {
@@ -44,14 +45,40 @@ class _AnnouncementState extends State<Announcement> {
               ],
             ),
           ),
-          // search
+          // Button to create a post
           Container(
-            // color: Color(0xececec),
-            child: buildProfileOption('Search', Icons.search, () {
-              // color: Color(0xececec),
-              showSearch(context: context, delegate: DataSearch());
-            }),
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(vertical: 16.0),
+            margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8.0), // Adjust the border radius as needed
+            ),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CreatePostPage()),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor:
+                    Color(0xFF27346A), // Set the background color of the button
+                elevation: 0, // No elevation
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Create a Post',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white, // Text color
+                  ),
+                ),
+              ),
+            ),
           ),
+
           // category
           Container(
             //chosen of category
