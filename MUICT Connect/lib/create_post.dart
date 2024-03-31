@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore
 import 'dashboard.dart';
 import 'profile.dart';
 import 'bookmark.dart';
@@ -13,7 +14,9 @@ class CreatePostPage extends StatefulWidget {
 class _CreatePostPageState extends State<CreatePostPage> {
   DateTime _selectedDate = DateTime.now();
   String _selectedPostType = 'registration';
+  String _title = '';
   String _imageUrl = '';
+  String _description = '';
   int _currentIndex = 0;
 
   @override
@@ -54,6 +57,11 @@ class _CreatePostPageState extends State<CreatePostPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextFormField(
+                onChanged: (value) {
+                  setState(() {
+                    _title = value;
+                  });
+                },
                 decoration: InputDecoration(
                   labelText: 'Title',
                   border: OutlineInputBorder(),
@@ -111,6 +119,11 @@ class _CreatePostPageState extends State<CreatePostPage> {
               ),
               SizedBox(height: 16.0),
               TextFormField(
+                onChanged: (value) {
+                  setState(() {
+                    _description = value;
+                  });
+                },
                 maxLines: 4,
                 decoration: InputDecoration(
                   labelText: 'Description',
@@ -145,7 +158,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                 height: 40.0,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Action to post the content
+                    uploadDataToFirestore();
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Color(0xFF27346A)),
@@ -161,7 +174,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 2,
+        currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
             _currentIndex = index;
@@ -234,4 +247,32 @@ class _CreatePostPageState extends State<CreatePostPage> {
       ),
     );
   }
+
+  void uploadDataToFirestore() {
+  FirebaseFirestore.instance.collection('Announcement').add({
+    'title': _title,
+    'createdDate': _selectedDate,
+    'category': _selectedPostType,
+    'description': _description,
+    'imageURL': _imageUrl,
+    'staffID': 1, // Assuming you have a fixed staffID
+    'eventID': 1, // Assuming you have a fixed eventID
+  }).then((value) {
+    // Data uploaded successfully
+    print('Data uploaded successfully');
+    // Show a success message
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Post uploaded successfully!'),
+        duration: Duration(seconds: 5), // Adjust the duration as needed
+      ),
+    );
+    // Navigate back to the announcement page
+    Navigator.pop(context);
+  }).catchError((error) {
+    // Error occurred while uploading data
+    print('Error uploading data: $error');
+    // Handle the error as needed
+  });
+}
 }
