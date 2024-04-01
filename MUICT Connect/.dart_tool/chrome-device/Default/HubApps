@@ -111,9 +111,9 @@
       "description": "Contextually relevant info for any page",
       "icon": {
          "raster_icon": {
-            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_copilot_blue.png/1.3.9/asset",
-            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_copilot_hc.png/1.3.9/asset",
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_copilot_blue.png/1.3.9/asset"
+            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_copilot_blue.png/1.3.10/asset",
+            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_copilot_hc.png/1.3.10/asset",
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_copilot_blue.png/1.3.10/asset"
          }
       },
       "id": "cd4688a9-e888-48ea-ad81-76193d56b1be",
@@ -126,8 +126,8 @@
          "enabled": true,
          "triggers|flight:msOmniboxSummarizeNotification": [ {
             "config": {
-               "min_sec_between_auto_show": 17280,
-               "show_count_basis": "url",
+               "min_sec_between_auto_show": 7200,
+               "show_count_basis": "signal",
                "signal_name": "IsTextPage",
                "signal_threshold": 0.5
             },
@@ -136,13 +136,13 @@
             "type": "triggering_config"
          }, {
             "config": {
-               "min_sec_between_auto_show": 17280,
-               "show_count_basis": "url",
+               "min_sec_between_auto_show": 7200,
+               "show_count_basis": "signal",
                "signal_name": "IsVideoPage",
                "signal_threshold": 0.5
             },
             "location": "omnibox",
-            "text": "Summarize the video with Copilot",
+            "text": "General video highlights",
             "type": "triggering_config"
          } ],
          "triggers|flight:msUndersideGamingNotification": [ {
@@ -184,7 +184,7 @@
       "target": {
          "command": "discover_chat"
       },
-      "version": "1.3.9"
+      "version": "1.3.10"
    }, {
       "auto_show": {
          "enabled": true,
@@ -303,9 +303,9 @@
       "description": "Search without losing your place",
       "icon": {
          "raster_icon": {
-            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_search_maximal_dark.png/1.3.13/asset",
-            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_search_hc.png/1.3.13/asset",
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_search_maximal_light.png/1.3.13/asset"
+            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_search_maximal_dark.png/1.3.14/asset",
+            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_search_hc.png/1.3.14/asset",
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_search_maximal_light.png/1.3.14/asset"
          }
       },
       "id": "8ac719c5-140b-4bf2-a0b7-c71617f1f377",
@@ -320,7 +320,7 @@
       "target": {
          "command": "search"
       },
-      "version": "1.3.13"
+      "version": "1.3.14"
    }, {
       "capabilities": {
          "deprecated_hide_header": true

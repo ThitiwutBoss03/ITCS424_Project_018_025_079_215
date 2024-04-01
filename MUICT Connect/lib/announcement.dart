@@ -6,6 +6,7 @@ import 'profile.dart';
 import 'bookmark.dart';
 import 'notification.dart';
 import 'create_post.dart';
+import 'manage_post.dart';
 
 // Announcement
 class Announcement extends StatefulWidget {
@@ -21,7 +22,6 @@ class _AnnouncementState extends State<Announcement> {
     'announcement',
     'internship',
     'activities',
-    'bookmark'
   ]; // for category
   List<DocumentSnapshot> allDocuments = [];
   @override
@@ -57,7 +57,7 @@ class _AnnouncementState extends State<Announcement> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => CreatePostPage()),
+                  MaterialPageRoute(builder: (context) => ManagePost()),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -68,7 +68,7 @@ class _AnnouncementState extends State<Announcement> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'Create a Post',
+                  'Post Management',
                   style: TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,

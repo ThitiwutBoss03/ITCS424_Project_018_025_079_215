@@ -104,6 +104,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "fixnum",
+      "rootUri": "file:///C:/Users/Thitiwut/AppData/Local/Pub/Cache/hosted/pub.dev/fixnum-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
       "name": "flutter",
       "rootUri": "file:///C:/flutter/packages/flutter",
       "packageUri": "lib/",
@@ -332,6 +338,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "sprintf",
+      "rootUri": "file:///C:/Users/Thitiwut/AppData/Local/Pub/Cache/hosted/pub.dev/sprintf-7.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "stack_trace",
       "rootUri": "file:///C:/Users/Thitiwut/AppData/Local/Pub/Cache/hosted/pub.dev/stack_trace-1.11.1",
       "packageUri": "lib/",
@@ -446,6 +458,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "uuid",
+      "rootUri": "file:///C:/Users/Thitiwut/AppData/Local/Pub/Cache/hosted/pub.dev/uuid-4.3.3",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "vector_math",
       "rootUri": "file:///C:/Users/Thitiwut/AppData/Local/Pub/Cache/hosted/pub.dev/vector_math-2.1.4",
       "packageUri": "lib/",
@@ -476,7 +494,7 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2024-02-26T04:55:06.193384Z",
+  "generated": "2024-04-01T04:05:53.907846Z",
   "generator": "pub",
   "generatorVersion": "3.3.0"
 }

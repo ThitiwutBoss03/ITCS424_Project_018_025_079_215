@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore
+import 'package:uuid/uuid.dart'; // Import the uuid package
 import 'dashboard.dart';
 import 'profile.dart';
 import 'bookmark.dart';
@@ -17,7 +20,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
   String _title = '';
   String _imageUrl = '';
   String _description = '';
-  int _currentIndex = 0;
+  int _currentIndex = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +55,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: SingleChildScrollView(
-          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -102,8 +106,12 @@ class _CreatePostPageState extends State<CreatePostPage> {
                           _selectedPostType = value!;
                         });
                       },
-                      items: ['registration', 'announcement', 'internship', 'activities']
-                          .map<DropdownMenuItem<String>>((String value) {
+                      items: [
+                        'registration',
+                        'announcement',
+                        'internship',
+                        'activities'
+                      ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Text(value),
@@ -161,7 +169,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                     uploadDataToFirestore();
                   },
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Color(0xFF27346A)),
+                    backgroundColor:
+                        MaterialStateProperty.all(Color(0xFF27346A)),
                   ),
                   child: Text(
                     'Post',
@@ -249,30 +258,34 @@ class _CreatePostPageState extends State<CreatePostPage> {
   }
 
   void uploadDataToFirestore() {
-  FirebaseFirestore.instance.collection('Announcement').add({
-    'title': _title,
-    'createdDate': _selectedDate,
-    'category': _selectedPostType,
-    'description': _description,
-    'imageURL': _imageUrl,
-    'staffID': 1, // Assuming you have a fixed staffID
-    'eventID': 1, // Assuming you have a fixed eventID
-  }).then((value) {
-    // Data uploaded successfully
-    print('Data uploaded successfully');
-    // Show a success message
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Post uploaded successfully!'),
-        duration: Duration(seconds: 5), // Adjust the duration as needed
-      ),
-    );
-    // Navigate back to the announcement page
-    Navigator.pop(context);
-  }).catchError((error) {
-    // Error occurred while uploading data
-    print('Error uploading data: $error');
-    // Handle the error as needed
-  });
-}
+    // Generate a unique eventID using the Random class
+    Random random = Random();
+    int uniqueEventID = random.nextInt(1000000); // Adjust the range as needed
+
+    FirebaseFirestore.instance.collection('Announcement').add({
+      'title': _title,
+      'createdDate': _selectedDate,
+      'category': _selectedPostType,
+      'description': _description,
+      'imageURL': _imageUrl,
+      'staffID': 1, // Assuming you have a fixed staffID
+      'eventID': uniqueEventID, // Use the unique eventID
+    }).then((value) {
+      // Data uploaded successfully
+      print('Data uploaded successfully');
+      // Show a success message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Post uploaded successfully!'),
+          duration: Duration(seconds: 5), // Adjust the duration as needed
+        ),
+      );
+      // Navigate back to the announcement page
+      Navigator.pop(context);
+    }).catchError((error) {
+      // Error occurred while uploading data
+      print('Error uploading data: $error');
+      // Handle the error as needed
+    });
+  }
 }
