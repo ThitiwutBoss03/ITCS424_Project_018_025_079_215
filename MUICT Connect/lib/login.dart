@@ -120,7 +120,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               ),
               SizedBox(height: 16.0),
               TextButton(
-                child: Text('Forgot Password?', style: TextStyle(color: Colors.white70)),
+                child: Text('Register here', style: TextStyle(color: Colors.white70)),
                 onPressed: () {
                   // Insert navigation logic
                 },
