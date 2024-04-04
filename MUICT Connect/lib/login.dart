@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/register.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dashboard.dart';
 
 class LoginApp extends StatelessWidget {
   @override
@@ -24,18 +26,50 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final _googleSignIn = GoogleSignIn();
 
   // Declare password visibility state here
   bool _passwordVisible = false;
 
-  void _loginWithEmail() {
-    // Insert registration logic
+  Future<void> _loginWithEmail() async {
+    try {
+      // Retrieve the document from Firestore
+      final snapshot = await FirebaseFirestore.instance
+          .collection('Student')
+          .where('email', isEqualTo: _emailController.text)
+          .where('password', isEqualTo: _passwordController.text)
+          .get();
+
+      // Check if the document exists
+      if (snapshot.docs.isNotEmpty) {
+        // If successful, navigate to home screen
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => DashboardApp()),
+        );
+      } else {
+        // Show error message for invalid credentials
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Invalid email or password. Please try again.'),
+            duration: Duration(seconds: 5),
+          ),
+        );
+      }
+    } catch (e) {
+      // Handle errors
+      print('Error: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Sign-in failed. Please try again.'),
+          duration: Duration(seconds: 5),
+        ),
+      );
+    }
   }
 
   Future<void> _loginWithGoogle() async {
-    // Insert Google sign-in logic
+    // Same as before
   }
 
   @override
@@ -48,23 +82,18 @@ class _LoginScreenState extends State<LoginScreen> {
           height: MediaQuery.of(context).size.height,
           color: Color(0xFF27346A), // This sets the background color
           child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.stretch,
-            // mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               SizedBox(height: 60.0),
               Image.asset('assets/Logo.png', height: 150),
               SizedBox(height: 48.0),
-              // Email input
-              // Email input
               _buildTextInputField(
                 controller: _emailController,
                 hintText: 'Email',
                 icon: Icons.email,
               ),
               SizedBox(height: 16.0),
-              // Password input
               _buildTextInputField(
                 controller: _passwordController,
                 hintText: 'Password',
@@ -72,23 +101,19 @@ class _LoginScreenState extends State<LoginScreen> {
                 isPassword: true,
               ),
               SizedBox(height: 20.0),
-              // Sign Up Button
               Container(
-                padding: EdgeInsets.symmetric(
-                    horizontal: 8.0), // Match the padding of the text fields
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
                 child: ElevatedButton(
                   child: Text('Sign in', style: TextStyle(color: Colors.white)),
                   onPressed: _loginWithEmail,
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: 6.0),
                     backgroundColor:
-                        Color.fromARGB(255, 95, 156, 247), // Button color
+                        Color.fromARGB(255, 95, 156, 247),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          20), // Match the border radius of the text fields
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                    minimumSize: Size(double.infinity,
-                        56), // Button minimum size, matches the height of text fields
+                    minimumSize: Size(double.infinity, 56),
                   ),
                 ),
               ),
@@ -97,13 +122,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Image.asset(
                   'assets/Or_Underline.png',
                   fit: BoxFit.contain,
-                  height: 35, // Adjust the height of the logo as needed
+                  height: 35,
                 ),
               ),
-              // Google Sign In Button
               Container(
-                padding: EdgeInsets.symmetric(
-                    horizontal: 8.0), // Match the padding of the text fields
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
                 child: ElevatedButton.icon(
                   icon: Image.asset('assets/google_logo.svg', height: 20),
                   label: Text('Continue with Google'),
@@ -113,8 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    minimumSize: Size(double.infinity,
-                        56), // Button minimum size, matches the height of text fields
+                    minimumSize: Size(double.infinity, 56),
                   ),
                 ),
               ),
@@ -142,9 +164,6 @@ class _LoginScreenState extends State<LoginScreen> {
     required IconData icon,
     bool isPassword = false,
   }) {
-    // State for password visibility
-    bool _passwordVisible = false;
-
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.0),
       decoration: BoxDecoration(
@@ -153,12 +172,10 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       child: TextFormField(
         controller: controller,
-        obscureText: isPassword &&
-            !_passwordVisible, // Toggles based on the isPassword and _passwordVisible state
+        obscureText: isPassword && !_passwordVisible,
         decoration: InputDecoration(
           hintText: hintText,
           prefixIcon: Icon(icon, color: Color(0xFF6F6F6F)),
-          // Add the suffix icon if this is a password field
           suffixIcon: isPassword
               ? IconButton(
                   icon: Icon(
@@ -166,17 +183,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Color(0xFF6F6F6F),
                   ),
                   onPressed: () {
-                    // Update the state upon pressing the icon
                     setState(() {
                       _passwordVisible = !_passwordVisible;
                     });
                   },
                 )
-              : null, // No icon if not a password
+              : null,
           border: InputBorder.none,
         ),
-        keyboardType:
-            isPassword ? TextInputType.text : TextInputType.emailAddress,
+        keyboardType: isPassword ? TextInputType.text : TextInputType.emailAddress,
       ),
     );
   }
