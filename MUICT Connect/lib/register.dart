@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/dashboard.dart'; // Assuming this is the dashboard/home page
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application_1/login.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+// import 'package:google_sign_in/google_sign_in.dart';
 
 class RegisterApp extends StatelessWidget {
   @override
@@ -25,18 +27,53 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
-
-  // Declare password visibility state here
+  // final GoogleSignIn _googleSignIn = GoogleSignIn();
   bool _passwordVisible = false;
 
-  void _registerWithEmail() {
-    // Insert registration logic
+  void _registerWithEmail() async {
+    if (_passwordController.text == _confirmPasswordController.text) {
+      try {
+        final UserCredential user =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text,
+          password: _passwordController.text,
+        );
+        if (user.user != null) {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => LoginApp()));
+        }
+      } on FirebaseAuthException catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(e.message ?? 'Registration failed')));
+      }
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Passwords do not match")));
+    }
   }
 
-  Future<void> _registerWithGoogle() async {
-    // Insert Google sign-in logic
-  }
+  // Future<void> _registerWithGoogle() async {
+  //   try {
+  //     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+  //     if (googleUser != null) {
+  //       final GoogleSignInAuthentication googleAuth =
+  //           await googleUser.authentication;
+  //       final AuthCredential credential = GoogleAuthProvider.credential(
+  //         accessToken: googleAuth.accessToken,
+  //         idToken: googleAuth.idToken,
+  //       );
+  //       final UserCredential userCredential =
+  //           await FirebaseAuth.instance.signInWithCredential(credential);
+  //       if (userCredential.user != null) {
+  //         Navigator.pushReplacement(
+  //             context, MaterialPageRoute(builder: (context) => DashboardApp()));
+  //       }
+  //     }
+  //   } catch (e) {
+  //     ScaffoldMessenger.of(context)
+  //         .showSnackBar(SnackBar(content: Text('Google sign-in failed')));
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -46,25 +83,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
           height: MediaQuery.of(context).size.height,
-          color: Color(0xFF27346A), // This sets the background color
+          color: Color(0xFF27346A),
           child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.stretch,
-            // mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               SizedBox(height: 60.0),
               Image.asset('assets/Logo.png', height: 150),
               SizedBox(height: 48.0),
-              // Email input
-              // Email input
               _buildTextInputField(
                 controller: _emailController,
                 hintText: 'Email',
                 icon: Icons.email,
               ),
               SizedBox(height: 16.0),
-              // Password input
               _buildTextInputField(
                 controller: _passwordController,
                 hintText: 'Password',
@@ -72,7 +104,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 isPassword: true,
               ),
               SizedBox(height: 16.0),
-              // Confirm Password input
               _buildTextInputField(
                 controller: _confirmPasswordController,
                 hintText: 'Confirm Password',
@@ -80,60 +111,47 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 isPassword: true,
               ),
               SizedBox(height: 20.0),
-              // Sign Up Button
               Container(
-                padding: EdgeInsets.symmetric(
-                    horizontal: 8.0), // Match the padding of the text fields
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
                 child: ElevatedButton(
                   child: Text('Sign up', style: TextStyle(color: Colors.white)),
                   onPressed: _registerWithEmail,
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: 6.0),
-                    backgroundColor:
-                        Color.fromARGB(255, 95, 156, 247), // Button color
+                    backgroundColor: Color.fromARGB(255, 95, 156, 247),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          20), // Match the border radius of the text fields
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                    minimumSize: Size(double.infinity,
-                        56), // Button minimum size, matches the height of text fields
+                    minimumSize: Size(double.infinity, 56),
                   ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(20),
-                child: Image.asset(
-                  'assets/Or_Underline.png',
-                  fit: BoxFit.contain,
-                  height: 35, // Adjust the height of the logo as needed
-                ),
+                child: Image.asset('assets/Or_Underline.png', height: 35),
               ),
-              // Google Sign In Button
-              Container(
-                padding: EdgeInsets.symmetric(
-                    horizontal: 8.0), // Match the padding of the text fields
-                child: ElevatedButton.icon(
-                  icon: Image.asset('assets/google_logo.svg', height: 20),
-                  label: Text('Continue with Google'),
-                  onPressed: _registerWithGoogle,
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 6.0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    minimumSize: Size(double.infinity,
-                        56), // Button minimum size, matches the height of text fields
-                  ),
-                ),
-              ),
+              // Container(
+              //   padding: EdgeInsets.symmetric(horizontal: 8.0),
+              //   child: ElevatedButton.icon(
+              //     icon: Image.asset('assets/google_logo.svg', height: 20),
+              //     label: Text('Continue with Google'),
+              //     onPressed: _registerWithGoogle,
+              //     style: ElevatedButton.styleFrom(
+              //       padding: EdgeInsets.symmetric(vertical: 6.0),
+              //       shape: RoundedRectangleBorder(
+              //         borderRadius: BorderRadius.circular(20),
+              //       ),
+              //       minimumSize: Size(double.infinity, 56),
+              //     ),
+              //   ),
+              // ),
               SizedBox(height: 16.0),
               TextButton(
                 child: Text('Already have an account? Sign in',
                     style: TextStyle(color: Colors.white70)),
                 onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => LoginApp()),
-                  );
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LoginApp()));
                 },
               ),
             ],
@@ -149,9 +167,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     required IconData icon,
     bool isPassword = false,
   }) {
-    // State for password visibility
-    bool _passwordVisible = false;
-
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.0),
       decoration: BoxDecoration(
@@ -160,12 +175,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       ),
       child: TextFormField(
         controller: controller,
-        obscureText: isPassword &&
-            !_passwordVisible, // Toggles based on the isPassword and _passwordVisible state
+        obscureText: isPassword && !_passwordVisible,
         decoration: InputDecoration(
           hintText: hintText,
           prefixIcon: Icon(icon, color: Color(0xFF6F6F6F)),
-          // Add the suffix icon if this is a password field
           suffixIcon: isPassword
               ? IconButton(
                   icon: Icon(
@@ -173,13 +186,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     color: Color(0xFF6F6F6F),
                   ),
                   onPressed: () {
-                    // Update the state upon pressing the icon
                     setState(() {
                       _passwordVisible = !_passwordVisible;
                     });
                   },
                 )
-              : null, // No icon if not a password
+              : null,
           border: InputBorder.none,
         ),
         keyboardType:

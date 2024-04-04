@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/register.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -31,42 +32,27 @@ class _LoginScreenState extends State<LoginScreen> {
   // Declare password visibility state here
   bool _passwordVisible = false;
 
-  Future<void> _loginWithEmail() async {
+Future<void> _loginWithEmail() async {
     try {
-      // Retrieve the document from Firestore
-      final snapshot = await FirebaseFirestore.instance
-          .collection('Student')
-          .where('email', isEqualTo: _emailController.text)
-          .where('password', isEqualTo: _passwordController.text)
-          .get();
-
-      // Check if the document exists
-      if (snapshot.docs.isNotEmpty) {
-        // If successful, navigate to home screen
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => DashboardApp()),
-        );
-      } else {
-        // Show error message for invalid credentials
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Invalid email or password. Please try again.'),
-            duration: Duration(seconds: 5),
-          ),
-        );
-      }
-    } catch (e) {
-      // Handle errors
-      print('Error: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Sign-in failed. Please try again.'),
-          duration: Duration(seconds: 5),
-        ),
+      // Attempt to sign in with email and password
+      final UserCredential user =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
       );
+
+      // Check if the user is successfully signed in
+      if (user.user != null) {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => DashboardApp()));
+      }
+    } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+              e.message ?? 'Invalid email or password. Please try again.')));
     }
   }
+
 
   Future<void> _loginWithGoogle() async {
     // Same as before
