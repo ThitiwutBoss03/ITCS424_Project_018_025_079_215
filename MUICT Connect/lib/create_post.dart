@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore
@@ -15,6 +16,9 @@ class CreatePostPage extends StatefulWidget {
 }
 
 class _CreatePostPageState extends State<CreatePostPage> {
+  // Define form key for validation
+  final _formKey = GlobalKey<FormState>();
+
   DateTime _selectedDate = DateTime.now();
   String _selectedPostType = 'registration';
   String _title = '';
@@ -57,128 +61,152 @@ class _CreatePostPageState extends State<CreatePostPage> {
         child: SingleChildScrollView(
           padding:
               EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextFormField(
-                onChanged: (value) {
-                  setState(() {
-                    _title = value;
-                  });
-                },
-                decoration: InputDecoration(
-                  labelText: 'Title',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              SizedBox(height: 16.0),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextButton.icon(
-                      onPressed: () {
-                        showDatePicker(
-                          context: context,
-                          initialDate: _selectedDate,
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(2100),
-                        ).then((value) {
-                          if (value != null) {
-                            setState(() {
-                              _selectedDate = value;
-                            });
-                          }
-                        });
-                      },
-                      icon: Icon(Icons.calendar_today),
-                      label: Text(
-                        'Date: ${_selectedDate.day}/${_selectedDate.month}/${_selectedDate.year}',
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 16.0),
-                  Expanded(
-                    child: DropdownButtonFormField<String>(
-                      value: _selectedPostType,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedPostType = value!;
-                        });
-                      },
-                      items: [
-                        'registration',
-                        'announcement',
-                        'internship',
-                        'activities'
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      decoration: InputDecoration(
-                        labelText: 'Category',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 16.0),
-              TextFormField(
-                onChanged: (value) {
-                  setState(() {
-                    _description = value;
-                  });
-                },
-                maxLines: 4,
-                decoration: InputDecoration(
-                  labelText: 'Description',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              SizedBox(height: 16.0),
-              Row(
-                children: [
-                  Icon(Icons.image),
-                  SizedBox(width: 8.0),
-                  Text('Image :'),
-                  SizedBox(width: 8.0),
-                  Expanded(
-                    child: TextFormField(
-                      onChanged: (value) {
-                        setState(() {
-                          _imageUrl = value;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        labelText: 'Image URL',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 16.0),
-              Container(
-                width: double.infinity,
-                height: 40.0,
-                child: ElevatedButton(
-                  onPressed: () {
-                    uploadDataToFirestore();
+          child: Form(
+            key: _formKey, // Assign the form key
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextFormField(
+                  onChanged: (value) {
+                    setState(() {
+                      _title = value;
+                    });
                   },
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(Color(0xFF27346A)),
+                  decoration: InputDecoration(
+                    labelText: 'Title',
+                    border: OutlineInputBorder(),
                   ),
-                  child: Text(
-                    'Post',
-                    style: TextStyle(fontSize: 18.0, color: Colors.white),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter a title';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 16.0),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextButton.icon(
+                        onPressed: () {
+                          showDatePicker(
+                            context: context,
+                            initialDate: _selectedDate,
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2100),
+                          ).then((value) {
+                            if (value != null) {
+                              setState(() {
+                                _selectedDate = value;
+                              });
+                            }
+                          });
+                        },
+                        icon: Icon(Icons.calendar_today),
+                        label: Text(
+                          'Date: ${_selectedDate.day}/${_selectedDate.month}/${_selectedDate.year}',
+                          style: TextStyle(fontSize: 16.0),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 16.0),
+                    Expanded(
+                      child: DropdownButtonFormField<String>(
+                        value: _selectedPostType,
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedPostType = value!;
+                          });
+                        },
+                        items: [
+                          'registration',
+                          'announcement',
+                          'internship',
+                          'activities'
+                        ].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        decoration: InputDecoration(
+                          labelText: 'Category',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 16.0),
+                TextFormField(
+                  onChanged: (value) {
+                    setState(() {
+                      _description = value;
+                    });
+                  },
+                  maxLines: 4,
+                  decoration: InputDecoration(
+                    labelText: 'Description',
+                    border: OutlineInputBorder(),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter a description';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 16.0),
+                Row(
+                  children: [
+                    Icon(Icons.image),
+                    SizedBox(width: 8.0),
+                    Text('Image :'),
+                    SizedBox(width: 8.0),
+                    Expanded(
+                      child: TextFormField(
+                        onChanged: (value) {
+                          setState(() {
+                            _imageUrl = value;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'Image URL',
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter an image URL';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 16.0),
+                Container(
+                  width: double.infinity,
+                  height: 40.0,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Check if form is valid before uploading data
+                      if (_formKey.currentState!.validate()) {
+                        uploadDataToFirestore();
+                      }
+                    },
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(Color(0xFF27346A)),
+                    ),
+                    child: Text(
+                      'Post',
+                      style: TextStyle(fontSize: 18.0, color: Colors.white),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -258,13 +286,16 @@ class _CreatePostPageState extends State<CreatePostPage> {
   }
 
   void uploadDataToFirestore() {
+    // Format the selected date
+    String formattedDate = DateFormat('MMM dd, yyyy').format(_selectedDate);
+
     // Generate a unique eventID using the Random class
     Random random = Random();
     int uniqueEventID = random.nextInt(1000000); // Adjust the range as needed
 
     FirebaseFirestore.instance.collection('Announcement').add({
       'title': _title,
-      'createdDate': _selectedDate,
+      'createdDate': formattedDate, // Use the formatted date
       'category': _selectedPostType,
       'description': _description,
       'imageURL': _imageUrl,
