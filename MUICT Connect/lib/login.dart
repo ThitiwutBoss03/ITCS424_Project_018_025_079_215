@@ -5,7 +5,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dashboard.dart';
 
-class LoginApp extends StatelessWidget {
+// Login Page
+class LoginApp extends StatelessWidget { 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,6 +17,23 @@ class LoginApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
     );
+  }
+}
+
+class Logger {
+  static bool isDebugMode = false; // Toggle this based on your environment
+
+  static void log(String message) {
+    if (isDebugMode) {
+      print(message);
+    }
+  }
+
+  static void error(String message, [Object? error]) {
+    print('ERROR: $message');
+    if (error != null) {
+      print('Error Details: $error');
+    }
   }
 }
 
@@ -57,7 +75,7 @@ Future<void> _loginWithEmail() async {
   Future<void> _loginWithGoogle() async {
     // Same as before
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -144,6 +162,7 @@ Future<void> _loginWithEmail() async {
     );
   }
 
+  
   Widget _buildTextInputField({
     required TextEditingController controller,
     required String hintText,

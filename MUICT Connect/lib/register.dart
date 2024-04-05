@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application_1/login.dart';
 // import 'package:google_sign_in/google_sign_in.dart';
 
+// Register Page
 class RegisterApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -17,6 +18,24 @@ class RegisterApp extends StatelessWidget {
     );
   }
 }
+
+class Logger {
+  static bool isDebugMode = false; // Toggle this based on your environment
+
+  static void log(String message) {
+    if (isDebugMode) {
+      print(message);
+    }
+  }
+
+  static void error(String message, [Object? error]) {
+    print('ERROR: $message');
+    if (error != null) {
+      print('Error Details: $error');
+    }
+  }
+}
+
 
 class RegistrationScreen extends StatefulWidget {
   @override
