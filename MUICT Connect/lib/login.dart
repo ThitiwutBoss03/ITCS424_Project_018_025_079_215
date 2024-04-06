@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/register.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dashboard.dart';
 
 // Login Page
@@ -45,7 +44,12 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _googleSignIn = GoogleSignIn();
+  
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+      clientId:
+          '33592492352-b7ovqd6q71r1amtn2r6gbv45v1stu6js.apps.googleusercontent.com');
+  GoogleSignInAccount? _user;
+  GoogleSignInAccount get user => _user!;
 
   // Declare password visibility state here
   bool _passwordVisible = false;
@@ -71,9 +75,29 @@ Future<void> _loginWithEmail() async {
     }
   }
 
-
   Future<void> _loginWithGoogle() async {
-    // Same as before
+    try {
+      final googleUser = await _googleSignIn.signIn();
+      if (googleUser == null) return;
+      _user = googleUser;
+
+      final googleAuth = await googleUser.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      final userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+
+      if (userCredential.user != null) {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => DashboardApp()));
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Failed to sign in with Google. Please try again.')));
+      Logger.error('Google Sign-In Error', e);
+    }
   }
   
   @override

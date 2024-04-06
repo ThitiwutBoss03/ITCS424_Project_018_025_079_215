@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/dashboard.dart'; // Assuming this is the dashboard/home page
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application_1/login.dart';
-// import 'package:google_sign_in/google_sign_in.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 // Register Page
 class RegisterApp extends StatelessWidget {
@@ -36,7 +36,6 @@ class Logger {
   }
 }
 
-
 class RegistrationScreen extends StatefulWidget {
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
@@ -46,7 +45,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  // final GoogleSignIn _googleSignIn = GoogleSignIn();
+  
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+      clientId:
+          '33592492352-b7ovqd6q71r1amtn2r6gbv45v1stu6js.apps.googleusercontent.com');
+
   bool _passwordVisible = false;
 
   void _registerWithEmail() async {
@@ -71,28 +74,29 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     }
   }
 
-  // Future<void> _registerWithGoogle() async {
-  //   try {
-  //     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-  //     if (googleUser != null) {
-  //       final GoogleSignInAuthentication googleAuth =
-  //           await googleUser.authentication;
-  //       final AuthCredential credential = GoogleAuthProvider.credential(
-  //         accessToken: googleAuth.accessToken,
-  //         idToken: googleAuth.idToken,
-  //       );
-  //       final UserCredential userCredential =
-  //           await FirebaseAuth.instance.signInWithCredential(credential);
-  //       if (userCredential.user != null) {
-  //         Navigator.pushReplacement(
-  //             context, MaterialPageRoute(builder: (context) => DashboardApp()));
-  //       }
-  //     }
-  //   } catch (e) {
-  //     ScaffoldMessenger.of(context)
-  //         .showSnackBar(SnackBar(content: Text('Google sign-in failed')));
-  //   }
-  // }
+Future<void> _registerWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      if (googleUser != null) {
+        final GoogleSignInAuthentication googleAuth =
+            await googleUser.authentication;
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+        final UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithCredential(credential);
+        if (userCredential.user != null) {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => DashboardApp()));
+        }
+      }
+    } catch (e) {
+      Logger.error('Google Sign-In Error', e);
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Google sign-in failed')));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -149,21 +153,22 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 padding: const EdgeInsets.all(20),
                 child: Image.asset('assets/Or_Underline.png', height: 35),
               ),
-              // Container(
-              //   padding: EdgeInsets.symmetric(horizontal: 8.0),
-              //   child: ElevatedButton.icon(
-              //     icon: Image.asset('assets/google_logo.svg', height: 20),
-              //     label: Text('Continue with Google'),
-              //     onPressed: _registerWithGoogle,
-              //     style: ElevatedButton.styleFrom(
-              //       padding: EdgeInsets.symmetric(vertical: 6.0),
-              //       shape: RoundedRectangleBorder(
-              //         borderRadius: BorderRadius.circular(20),
-              //       ),
-              //       minimumSize: Size(double.infinity, 56),
-              //     ),
-              //   ),
-              // ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                child: ElevatedButton.icon(
+                  icon: Image.asset('assets/google_logo.svg', height: 20),
+                  label: Text('Continue with Google'),
+                  onPressed: _registerWithGoogle,
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(vertical: 6.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    minimumSize: Size(double.infinity, 56),
+                  ),
+                ),
+              ),
+
               SizedBox(height: 16.0),
               TextButton(
                 child: Text('Already have an account? Sign in',
