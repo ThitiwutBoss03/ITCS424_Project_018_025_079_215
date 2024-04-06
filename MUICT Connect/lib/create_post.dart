@@ -294,6 +294,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
     int uniqueEventID = random.nextInt(1000000); // Adjust the range as needed
 
     FirebaseFirestore.instance.collection('Announcement').add({
+      'bookmark': false,
       'title': _title,
       'createdDate': formattedDate, // Use the formatted date
       'category': _selectedPostType,

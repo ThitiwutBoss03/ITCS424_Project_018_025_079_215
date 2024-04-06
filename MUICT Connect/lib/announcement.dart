@@ -165,6 +165,7 @@ class _AnnouncementState extends State<Announcement> {
                     final description = document['description'] ?? '';
                     final date = document['createdDate']?.toString() ?? '';
                     final category = document['category'] ?? '';
+                    final isBookmarked = document['bookmark'] ?? false;
 
                     return BoxWidget(
                       imageUrl: imageUrl,
@@ -172,6 +173,13 @@ class _AnnouncementState extends State<Announcement> {
                       description: description,
                       date: date,
                       category: category,
+                      isBookmarked: isBookmarked,
+                      onBookmarkTap: () {
+                        // Toggle the bookmark status
+                        FirebaseFirestore.instance.collection('Announcement').doc(document.id).update({
+                          'bookmark': !isBookmarked,
+                        });
+                      },
                     );
                   },
                 );
@@ -251,87 +259,7 @@ class _AnnouncementState extends State<Announcement> {
       ),
     );
   }
-
-// icon create
-  Widget buildProfileOption(String title, IconData icon, VoidCallback? onTap,
-      {Color? textColor, Color? iconColor}) {
-    return ListTile(
-      title: Text(
-        title,
-        style: TextStyle(
-          color: textColor,
-        ),
-      ),
-      leading: Icon(
-        icon,
-        color: iconColor,
-      ),
-      onTap: onTap,
-    );
-  }
 }
-// end icon create
-
-// search bar
-class DataSearch extends SearchDelegate<String> {
-  @override
-  List<Widget> buildActions(BuildContext context) {
-    // Actions for the app bar
-    return [
-      IconButton(
-        icon: Icon(Icons.clear),
-        onPressed: () {
-          query = '';
-        },
-      ),
-    ];
-  }
-
-  @override
-  Widget buildLeading(BuildContext context) {
-    // Leading icon on the left of the app bar
-    return IconButton(
-      icon: AnimatedIcon(
-        icon: AnimatedIcons.menu_arrow,
-        progress: transitionAnimation,
-      ),
-      onPressed: () {
-        close(context, '');
-      },
-    );
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    // Show results based on the search query
-    return Center(
-      child: Text('Your search results for $query'),
-    );
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    // Show suggestions as the user types
-    // You can fetch suggestions from your data source here
-    final List<String> suggestionList = [
-      'Search Result 1',
-      'Search Result 2',
-      'Search Result 3',
-    ];
-
-    return ListView.builder(
-      itemBuilder: (context, index) => ListTile(
-        title: Text(suggestionList[index]),
-        onTap: () {
-          // Handle suggestion tap
-          showResults(context);
-        },
-      ),
-      itemCount: suggestionList.length,
-    );
-  }
-}
-// end search bar
 
 // content box
 class BoxWidget extends StatelessWidget {
@@ -340,6 +268,8 @@ class BoxWidget extends StatelessWidget {
   final String description;
   final String date;
   final String category;
+  final bool isBookmarked;
+  final VoidCallback onBookmarkTap;
 
   const BoxWidget({
     required this.imageUrl,
@@ -347,6 +277,8 @@ class BoxWidget extends StatelessWidget {
     required this.description,
     required this.date,
     required this.category,
+    required this.isBookmarked,
+    required this.onBookmarkTap,
   });
 
   @override
@@ -375,10 +307,11 @@ class BoxWidget extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.favorite_border),
-                  onPressed: () {
-                    // Handle favorite button tap
-                  },
+                  icon: Icon(
+                    isBookmarked ? Icons.favorite : Icons.favorite_border,
+                    color: isBookmarked ? Colors.red : null,
+                  ),
+                  onPressed: onBookmarkTap,
                 ),
               ],
             ),
