@@ -1,4 +1,4 @@
-# flutter_application_1
+# MUICT Connect
 
 A new Flutter project.
 
