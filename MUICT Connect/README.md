@@ -38,7 +38,7 @@ MUICT Connect is designed to enhance communication within the Faculty of ICT by 
 3. Setup OpenWeather API:
    - Obtain an API key from OpenWeather.
    - Store the API key in your Flutter environment or configuration file.
-   - APi Key (OpenWeather):  ```bash 86fb463f2dc2a3f8797be6018610d38a ```or ```bash 3d5ea248b7dc3061d739255f5a6cb50e```
+   - APi Key (OpenWeather):  ```86fb463f2dc2a3f8797be6018610d38a ```or ```3d5ea248b7dc3061d739255f5a6cb50e```
 
 4. Initialize Firebase and OpenWeather API in your Flutter application:
    - Import `firebase_core` and add Firebase initialization code in `main.dart`.
