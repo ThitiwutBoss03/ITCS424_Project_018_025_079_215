@@ -16,7 +16,7 @@ MUICT Connect is designed to enhance communication within the Faculty of ICT by 
 
 1. Clone the project repository:
    ```bash
-   git clone repository-url](https://github.com/ThitiwutBoss03/ITCS424_Project_018_025_079_215.git
+   git clone https://github.com/ThitiwutBoss03/ITCS424_Project_018_025_079_215.git
    ```
 2. Navigate to the project directory:
    ```bash
