@@ -35,7 +35,13 @@ MUICT Connect is designed to enhance communication within the Faculty of ICT by 
    - Configure your Firebase project in the Firebase console.
    - Download `google-services.json` and place it in your project's `app` directory.
 
-3. Initialize Firebase in your Flutter application by importing `firebase_core` and adding the initialization code in the `main.dart` file.
+3. Setup OpenWeather API:
+   - Obtain an API key from OpenWeather.
+   - Store the API key in your Flutter environment or configuration file.
+
+4. Initialize Firebase and OpenWeather API in your Flutter application:
+   - Import `firebase_core` and add Firebase initialization code in `main.dart`.
+   - Configure API calls to OpenWeather to fetch and display weather data.
 
 ## Running the Application
 
@@ -49,7 +55,7 @@ This command compiles the application and launches it on a connected device or e
 ## Features
 
 - User registration and login
-- Real-time notifications
+- Real-time weather updates using OpenWeather API
 - Calendar integration for event management
 - Post creation and management with bookmark features
 
