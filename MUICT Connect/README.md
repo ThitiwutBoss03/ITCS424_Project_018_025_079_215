@@ -65,6 +65,3 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 
 For further inquiries or issues, please contact us through our GitHub repository or email the project maintainers directly.
 
----
-
-Make sure to replace placeholders like `[repository-url]` with actual data specific to your project setup. This README incorporates the key details from your report concerning the installation and usage of Firebase with Flutter as described in your document【11:0†source】.
