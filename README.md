@@ -1,7 +1,3 @@
-Based on the details extracted from your report, here is a tailored README file for your project:
-
----
-
 # MUICT Connect
 
 MUICT Connect is designed to enhance communication within the Faculty of ICT by providing a centralized platform for distributing academic and extracurricular information efficiently. This platform aims to support students in staying organized and informed about upcoming events and opportunities.
